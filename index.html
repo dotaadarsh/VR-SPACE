@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Black Museum</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-teleport-controls/dist/aframe-teleport-controls.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+  </head>
+  <body>
+    <a-scene
+      inspector-plugin-recast
+      cursor="rayOrigin: mouse"
+      raycaster="objects:
+      [ground]"
+      keyboard-shortcuts
+      screenshot
+      vr-mode-ui="enterARButton:
+      #myEnterARButton"
+      device-orientation-permission-ui
+      renderer="antialias:
+      auto; colorManagement: true; sortObjects: true; physicallyCorrectLights:
+      true; maxCanvasWidth: 1920; maxCanvasHeight: 1920;"
+    >
+      <a id="myEnterVRButton" href="#"></a>
+      <a id="myEnterARButton" href="#"></a>
+
+      <a-assets>
+        <a-asset-item
+          id="Paganini-nav-mesh"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FPaganini-navmesh.gltf?v=1617609079496"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="GardenPoolModel"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FGardenPool.glb?v=1612484889928"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="KeyboardScan8Model"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FKeyboardScan8.glb?v=1612485574722"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="Mac1Scan23Model"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FMac1Scan23.glb?v=1612486000754"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="Mac2Scan3Model"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FMac2Scan3.glb?v=1612767618452"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="Mac3Scan7Model"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FMac3Scan7.glb?v=1612767652903"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="RoomCorruption1Scan12Model"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FRoomCorruption1Scan12.glb?v=1612486655720"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="RoomCorruption1Scan17Model"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FRoomCorruption3Scan17.glb?v=1612487661391"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="RoomCorruption4Scan19Model"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FRoomCorruption4Scan19.glb?v=1612767701369"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="PlantsScan11Scan19Model"
+          src="https://cdn.glitch.com/cf3f89be-15b5-43d8-848f-da159432a1e7%2Fscene.gltf?v=1621163863054"
+        ></a-asset-item>
+
+        <img
+          id="MidiTexture"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Museum_black_icon.svg/1280px-Museum_black_icon.svg.png"
+        />
+
+        <img
+          id="TextTexture"
+          src="https://cdn.glitch.com/cf3f89be-15b5-43d8-848f-da159432a1e7%2FVIRTUAL%20museum.png?v=1621163165041"
+        />
+
+        <img
+          id="NavigationInstructionTexture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FFmidi2.png?v=1618798975902"
+        />
+
+        <img
+          id="TitleTexture"
+          src="https://cdn.glitch.com/cf3f89be-15b5-43d8-848f-da159432a1e7%2FVIRTUAL%20NAME.png?v=1621162888137"
+        />
+
+        <img
+          id="GardenPoolTexture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FGardenPool.png?v=1618798976002"
+        />
+
+        <img
+          id="KeyboardScan8Texture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FKeyboard%20Scan%208.png?v=1618798976236"
+        />
+
+        <img
+          id="RoomCorruption1Scan12Texture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FRoom%20Corruption%201%20Scan%2012.png?v=1618798976467"
+        />
+
+        <img
+          id="RoomCorruption1Scan17Texture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FRoom%20Corruption%201%20Scan%2017.png?v=1618798976486"
+        />
+
+        <img
+          id="Mac3Scan7Texture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FMac%203%20Scan%207.png?v=1618798976611"
+        />
+
+        <img
+          id="Mac2Scan3Texture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FMac%202%20Scan%203.png?v=1618798976637"
+        />
+
+        <img
+          id="Mac1Scan23Texture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FMac%201%20Scan%2023.png?v=1618798976659"
+        />
+
+        <img
+          id="PlantsScan11Texture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FPlants%20Scan%2011.png?v=1618798976679"
+        />
+
+        <img
+          id="RoomCorruption4Scan19Texture"
+          src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2FRoom%20Corruption%204%20Scan%2019.png?v=1618798976704"
+        />
+      </a-assets>
+
+      <!--Backround music-->
+
+      <a-sound
+        src="https://cdn.glitch.com/0a989cf7-724b-47c1-8ddf-62baa9717068%2Fbach-bwv825-4-sasaki.mp3?v=1612665815807"
+        autoplay="true"
+        position="0 1 0"
+        loop="true"
+      ></a-sound>
+
+      <!--Camera Rig-->
+      <a-entity
+        id="cameraRig"
+        movement-controls="speed:0.125; constrainToNavMesh: true; controls:  keyboard, touch"
+        position="-14 0 -4"
+        rotation="0 -90 0"
+      >
+        <a-entity
+          id="head"
+          position="0 1.6 0"
+          look-controls
+          camera
+          teleport-controls
+        >
+          <a-entity></a-entity>
+        </a-entity>
+
+        <a-entity
+          hand-controls="hand: left; handModelStyle: lowPoly; color: black"
+          aabb-collider="objects: .cube;"
+          grab
+          teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; collisionEntities: [ground]"
+        ></a-entity>
+
+        <a-entity
+          hand-controls="hand: right; handModelStyle: lowPoly; color: black"
+          aabb-collider="objects: .cube;"
+          grab
+          teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; collisionEntities: [ground]"
+        ></a-entity>
+      </a-entity>
+
+      <!--Navigation Mesh-->
+      <a-entity
+        gltf-model="#Paganini-nav-mesh"
+        nav-mesh
+        position="0 0 0"
+        visible="false"
+      >
+      </a-entity>
+
+      <!--Sky-->
+      <a-sky color="White" rotation="0 0 0"></a-sky>
+
+      <!--3D Models-->
+
+      <a-gltf-model
+        src="#GardenPoolModel"
+        scale="0.0275 0.0275 0.0275"
+        position="3.574 1.501 6.923"
+        rotation="0 0 90"
+        shadow="receive: false"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        src="#PlantsScan11Scan19Model"
+        scale="6.6 6.6 6.6"
+        position="15.965 3 10.521"
+        rotation="0 0 -10"
+        shadow="receive: false"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        src="#KeyboardScan8Model"
+        scale="0.35 0.35 0.35"
+        position="-2.34 8.4 -8.246"
+        rotation="0 0 0"
+        shadow="receive: false"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        src="#Mac1Scan23Model"
+        scale="0.11 0.11 0.11"
+        position="-15.975 1.829 2.241"
+        rotation="0 0 0"
+        shadow="receive: false"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        src="#Mac2Scan3Model"
+        scale="11 11 11"
+        position="2.65 2.199 -5.571"
+        rotation="0 0 0"
+        shadow="receive: false"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        src="#Mac3Scan7Model"
+        scale="11 11 11"
+        position="-12.504 1.556 8.881"
+        rotation="0 0 0"
+        shadow="receive: false"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        src="#RoomCorruption1Scan12Model"
+        scale="0.165 0.165 0.165"
+        position="1.074 4.045 13.487"
+        rotation="0 0 -45"
+        shadow="receive: false"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        src="#RoomCorruption1Scan17Model"
+        scale="3.3 3.3 3.3"
+        position="-1.001 -0.461 7.148"
+        rotation="0 0 0"
+        shadow="receive: false"
+      ></a-gltf-model>
+
+      <a-gltf-model
+        src="#RoomCorruption4Scan19Model"
+        scale="0.11 0.11 0.11"
+        position="12.939 2 -0.7"
+        rotation="0 0 0"
+        shadow="receive: false"
+      ></a-gltf-model>
+
+      <!--Floor-->
+
+      <a-plane
+        color="#c1c7d6"
+        position="0 0 0"
+        height="100"
+        width="100"
+        rotation="-90 0 0"
+        roughness="0.75"
+      ></a-plane>
+
+      <!--Ceiling-->
+      <a-plane
+        color="black"
+        position="0 6 0"
+        height="100"
+        width="100"
+        rotation="90 0 0"
+        roughness="0.75"
+      ></a-plane>
+
+      <!--Info Boards-->
+
+      <a-box
+        color="white"
+        scale="6 3 0.5"
+        position="-10 1.5 -8"
+        roughness="0.5"
+      >
+        
+                
+        <a-image
+          src="#TitleTexture"
+          rotation="0 0 0"
+          position="0.05 0.25 0.55"
+          scale="0.4 0.3 0.4"
+        ></a-image>
+        
+        
+        <a-image
+          src="#TextTexture"
+          scale="0.5 0.5 0.5"
+          position="0.15 -0.05 0.55"
+          rotation="0 0 0"
+        ></a-image>
+
+        <a-image
+          src="#NavigationInstructionTexture"
+          scale="0.3 0.3 0.3"
+          position="-0.25 -0.25 0.55"
+          rotation="0 0 0"
+        ></a-image>
+
+        <a-image
+          src="#MidiTexture"
+          scale="0.3 0.6 0.3"
+          position="-0.25 0.25 0.55"
+          rotation="0 0 0"
+        ></a-image>
+      </a-box>
+
+      <a-box
+        color="white"
+        scale="0.25 2 1"
+        position="2.186 1 14.225"
+        roughness="0.5"
+      >
+        <a-image
+          src="#GardenPoolTexture"
+          rotation="0 -90 0"
+          position="-0.525 0.2 0"
+          scale="1 0.5 1"
+        ></a-image>
+      </a-box>
+
+      <a-box
+        color="white"
+        scale="0.25 2 1"
+        position="9.125 1 -11.6"
+        roughness="0.5"
+      >
+        <a-image
+          src="#PlantsScan11Texture"
+          rotation="0 -90 0"
+          position="-0.525 0.2 0"
+          scale="1 0.5 1"
+        ></a-image>
+      </a-box>
+
+      <a-box
+        color="white"
+        scale="0.25 2 1"
+        position="0.9 1 -20"
+        roughness="0.5"
+      >
+        <a-image
+          src="#KeyboardScan8Texture"
+          rotation="0 -90 0"
+          position="-0.525 0.2 0"
+          scale="1 0.5 1"
+        ></a-image>
+      </a-box>
+
+      <a-box
+        color="white"
+        scale="0.25 2 1"
+        position="-10,5 1 1,325"
+        rotation="0 -90 0"
+        roughness="0.5"
+      >
+        <a-image
+          src="#Mac1Scan23Texture"
+          rotation="0 -90 0"
+          position="-0.525 0.2 0"
+          scale="1 0.5 1"
+        ></a-image>
+      </a-box>
+
+      <a-box
+        color="white"
+        scale="0.25 2 1"
+        position="0.75 1 -3.2"
+        roughness="0.5"
+      >
+        <a-image
+          src="#Mac2Scan3Texture"
+          rotation="0 -90 0"
+          position="-0.525 0.2 0"
+          scale="1 0.5 1"
+        ></a-image>
+      </a-box>
+
+      <a-box
+        color="white"
+        scale="0.25 2 1"
+        rotation="0 -90 0"
+        position="-13 1 9.45"
+        roughness="0.5"
+      >
+        <a-image
+          src="#Mac3Scan7Texture"
+          rotation="0 -90 0"
+          position="-0.525 0.2 0"
+          scale="1 0.5 1"
+        ></a-image>
+      </a-box>
+
+      <a-box
+        color="white"
+        scale="0.25 2 1"
+        position="-4.75 1 19.75"
+        roughness="0.5"
+      >
+        <a-image
+          src="#RoomCorruption1Scan12Texture"
+          rotation="0 -90 0"
+          position="-0.525 0.2 0"
+          scale="1 0.5 1"
+        ></a-image>
+      </a-box>
+
+      <a-box
+        color="white"
+        scale="0.25 2 1"
+        position="-1.34 1 6.525"
+        roughness="0.5"
+      >
+        <a-image
+          src="#RoomCorruption1Scan17Texture"
+          rotation="0 -90 0"
+          position="-0.525 0.2 0"
+          scale="1 0.5 1"
+        ></a-image>
+      </a-box>
+
+      <a-box
+        color="white"
+        scale="0.25 2 1"
+        position="11.8 1 0.5"
+        roughness="0.5"
+      >
+        <a-image
+          src="#RoomCorruption4Scan19Texture"
+          rotation="0 -90 0"
+          position="-0.525 0.2 0"
+          scale="1 0.5 1"
+        ></a-image>
+      </a-box>
+
+      <!--Lighting Columns-->
+
+      <a-entity position="10 2 15" scale="2 2 2" rotation="0 0 0">
+        <a-box
+          color="white"
+          scale="0.5 0.5 0.5"
+          position="0 0 0"
+          transparent="true"
+          opacity="0.25"
+          emissive="white"
+          roughness="0.5"
+        >
+          <a-box
+            color="white"
+            scale="0.65 0.65 0.65"
+            position="0 0 0"
+            emissive="#5E3B9A"
+            roughness="0.5"
+          >
+            <a-entity
+              light="type:point; castShadow: false; intensity:10; decay:0.5"
+              intensity="1"
+            ></a-entity>
+          </a-box>
+        </a-box>
+      </a-entity>
+
+      <a-box
+        color="white"
+        position="10 3.25 15"
+        roughness="0.5"
+        scale="1 1.5 1"
+        shadow="receive: true"
+      ></a-box>
+
+      <a-box
+        color="white"
+        position="10 0.75 15"
+        roughness="0.5"
+        scale="1 1.5 1"
+        shadow="receive: true"
+      ></a-box>
+
+      <a-entity position="10 2 -15" scale="2 2 2" rotation="0 0 0">
+        <a-box
+          color="white"
+          scale="0.5 0.5 0.5"
+          position="0 0 0"
+          transparent="true"
+          opacity="0.25"
+          emissive="white"
+          roughness="0.5"
+        >
+          <a-box
+            color="white"
+            scale="0.65 0.65 0.65"
+            position="0 0 0"
+            emissive="#5E3B9A"
+            roughness="0.5"
+          >
+            <a-entity
+              light="type:point; castShadow:false; intensity:10; decay:0.5"
+              intensity="1"
+            ></a-entity>
+          </a-box>
+        </a-box>
+      </a-entity>
+
+      <a-box
+        color="white"
+        position="10 3.25 -15"
+        roughness="0.5"
+        scale="1 1.5 1"
+        shadow="receive: true"
+      ></a-box>
+
+      <a-box
+        color="white"
+        position="10 0.75 -15"
+        roughness="0.5"
+        scale="1 1.5 1"
+        shadow="receive: true"
+      ></a-box>
+
+      <a-entity position="-10 2 15" scale="2 2 2" rotation="0 0 0">
+        <a-box
+          color="white"
+          scale="0.5 0.5 0.5"
+          position="0 0 0"
+          transparent="true"
+          opacity="0.25"
+          emissive="white"
+          roughness="0.5"
+        >
+          <a-box
+            color="white"
+            scale="0.65 0.65 0.65"
+            position="0 0 0"
+            emissive="#5E3B9A"
+            roughness="0.5"
+          >
+            <a-entity
+              light="type:point; castShadow: false; intensity:10; decay:0.5"
+              intensity="1"
+            ></a-entity>
+          </a-box>
+        </a-box>
+      </a-entity>
+
+      <a-box
+        color="white"
+        position="-10 3.25 15"
+        roughness="0.5"
+        scale="1 1.5 1"
+        shadow="receive: true"
+      ></a-box>
+
+      <a-box
+        color="white"
+        position="-10 0.75 15"
+        roughness="0.5"
+        scale="1 1.5 1"
+        shadow="receive: true"
+      ></a-box>
+
+      <a-entity position="-10 2 -15" scale="2 2 2" rotation="0 0 0">
+        <a-box
+          color="white"
+          scale="0.5 0.5 0.5"
+          position="0 0 0"
+          transparent="true"
+          opacity="0.25"
+          emissive="white"
+          roughness="0.5"
+        >
+          <a-box
+            color="white"
+            scale="0.65 0.65 0.65"
+            position="0 0 0"
+            emissive="#5E3B9A"
+            roughness="0.5"
+          >
+            <a-entity
+              light="type:point; castShadow: false; intensity:4; decay:0.5"
+              intensity="1"
+            ></a-entity>
+          </a-box>
+        </a-box>
+      </a-entity>
+
+      <a-box
+        color="black"
+        position="-10 3.25 -15"
+        roughness="0.5"
+        scale="1 1.5 1"
+        shadow="receive: true"
+      ></a-box>
+
+      <a-box
+        color="white"
+        position="-10 0.75 -15"
+        roughness="0.5"
+        scale="1 1.5 1"
+        shadow="receive: true"
+      ></a-box>
+    </a-scene>
+  </body>
+</html>
